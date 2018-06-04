@@ -1,7 +1,12 @@
 'use strict';
 
-var CLOUD_WIDTH = 500;
-var CLOUD_HEIGHT = 200;
+var CLOUD_WIDTH = 420;
+var CLOUD_HEIGHT = 270;
+var CLOUD_X = 100;
+var CLOUD_Y = 10;
+var GAP = 10;
+var FONT_SIZE = 16;
+var LINE_HEIGHT = 21;
 
 var renderCloud = function (ctx, x, y, color) {
   ctx.fillStyle = color;
@@ -17,7 +22,18 @@ var renderCloud = function (ctx, x, y, color) {
   ctx.fill();
 };
 
+var renderMainText = function (ctx, x, y, color, text) {
+  ctx.fillStyle = color;
+  var textWidth = ctx.measureText(text).width;
+  textWidth = Math.round(textWidth);
+  ctx.fillText(text, x - textWidth / 2, y);
+};
+
 window.renderStatistics = function (ctx) {
-  renderCloud(ctx, 110, 60, 'rgba(0, 0, 0, 0.3');
-  renderCloud(ctx, 100, 50, '#fff');
+  renderCloud(ctx, CLOUD_X + GAP, CLOUD_Y + GAP, 'rgba(0, 0, 0, 0.7');
+  renderCloud(ctx, CLOUD_X, CLOUD_Y, '#fff');
+
+  ctx.font = FONT_SIZE+'px PT Mono';
+  renderMainText(ctx, CLOUD_X + CLOUD_WIDTH / 2, CLOUD_Y + 40, 'black', 'Ура вы победили!' );
+  renderMainText(ctx, CLOUD_X + CLOUD_WIDTH / 2, CLOUD_Y + 40 + LINE_HEIGHT, 'black', 'Список результатов:');
 };
